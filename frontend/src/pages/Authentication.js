@@ -40,9 +40,12 @@ export async function action({ request }) {
 
   const resData = await response.json();
   const token = resData.token;
-  console.log(token);
-  // store token in browser 
+
   localStorage.setItem('token', token);
+  
+  const expration = new Date();
+  expration.setHours(expration.getHours() + 1);
+  localStorage.setItem('expiration', expration.toISOString());
 
   return redirect('/');
 }
